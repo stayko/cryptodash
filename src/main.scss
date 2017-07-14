@@ -1,8 +1,36 @@
 @import "colors";
+@import "fonts";
+
 body {
-  background-color: $primary;
+  background-color: $blue;
+  font-family: $main;
 }
 
 h1 {
-  color: $secondary;
+  color: $cream;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 36px;
+}
+
+.header {
+  background-color: $black;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.screen {
+  background-color: black;
+  color: $white;
+  width: 130px;
+  padding: 20px;
+  text-align: center;
+}
+
+.screen-holder {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
 }
