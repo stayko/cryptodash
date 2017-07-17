@@ -12,9 +12,10 @@ class App extends React.Component {
     return <div>
             <Header/>
               <div className="screen-holder">
-                <Screen crypto="btc-gbp"/>
-                <Screen crypto="eth-gbp"/>
-                <Screen crypto="ltc-gbp"/>
+                <Screen crypto="bitcoin"/>
+                <Screen crypto="ethereum"/>
+                <Screen crypto="litecoin"/>
+                <Screen crypto="ripple"/>
               </div>
            </div>;
   }

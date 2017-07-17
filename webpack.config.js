@@ -5,7 +5,7 @@ var extractPlugin = new ExtractTextPlugin({
 });
 
 module.exports = {
-  entry: './src/App.js',
+  entry: './src/client/App.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
