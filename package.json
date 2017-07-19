@@ -21,8 +21,12 @@
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "cron": "^1.2.1",
     "es6-promise": "^4.1.1",
+    "express": "^4.15.3",
     "isomorphic-fetch": "^2.2.1",
+    "mongoose": "^4.11.3",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
