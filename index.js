@@ -1,13 +1,8 @@
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
-var bodyParser = require('body-parser');
-var Crypto = require('./db');
-
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+var Crypto = require('./src/server/db');
+var path = require('path');
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -16,8 +11,7 @@ var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-
+router.get('/api', function(req, res) {
     Crypto.find({}, function (err, docs) {
       // docs is an array
       if (err) return handleError(err);
@@ -25,13 +19,20 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/dist/index.html'));
+});
+
+
 // more routes for our API will happen here
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('/', router);
+app.use(express.static(path.join(__dirname, '/dist')))
+
 
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Server running on port ' + port);

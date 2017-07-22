@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Header';
 import Screen from './Screen';
-import './main.scss';
+import '../css/main.scss';
 
 class App extends React.Component {
   constructor(props) {
