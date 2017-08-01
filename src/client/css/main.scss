@@ -21,16 +21,12 @@ h1 {
 }
 
 .screen {
-  background-color: black;
-  color: $white;
-  width: 130px;
-  padding: 20px;
+  background-color: $cream;
+  color: $black;
+  padding: 10px;
   text-align: center;
 }
 
 .screen-holder {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-items: center;
+
 }

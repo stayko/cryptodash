@@ -1,4 +1,4 @@
-var http = require('http');
+var https = require('https');
 var CronJob = require('cron').CronJob;
 var Crypto = require('./db');
 
@@ -8,10 +8,10 @@ new CronJob('1 * * * * *', function() {
 
   console.log('Fetching data...');
 
-  var url = 'http://api.coinmarketcap.com/v1/ticker/?convert=GBP&limit=4';
+  let url = 'https://api.coinmarketcap.com/v1/ticker/?convert=GBP&limit=4';
 
-  http.get(url, function(res){
-      var body = '';
+  https.get(url, function(res){
+      let body = '';
 
       res.on('data', function(chunk){
           body += chunk;
@@ -19,9 +19,9 @@ new CronJob('1 * * * * *', function() {
 
       res.on('end', function(){
           try {
-            var jsonData = JSON.parse(body);
-            var cryptoModelArray = [];
-            var cryptoData = [];
+            let jsonData = JSON.parse(body);
+            let cryptoModelArray = [];
+            let cryptoData = [];
             for(var i = 0; i < 4; i++){
               cryptoData.push(
               {
