@@ -6,8 +6,8 @@ import ScreenHolder from './ScreenHolder';
 import DateTime from './DateTime';
 import LineChart from 'react-linechart';
 
-import '../css/line.scss';
-import '../css/main.scss';
+import '../../css/line.scss';
+import '../../css/main.scss';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -71,4 +71,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App/>,document.getElementById('root'));
+export default App;

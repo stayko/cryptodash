@@ -16,7 +16,7 @@ var cleanWebpackPlugin = new CleanWebpackPlugin([
 ]);
 
 module.exports = {
-  entry: './src/client/js/App.js',
+  entry: './src/client/js/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
