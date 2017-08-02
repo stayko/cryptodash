@@ -7,13 +7,7 @@ mongoose.connect('mongodb://localhost/cryptodash',  { useMongoClient: true });
 var Schema = mongoose.Schema;
 var cryptoSchema = new Schema({
   date: { type: Date, default: Date.now },
-  data: [{
-    name:  String,
-    symbol: String,
-    price: Number,
-    totalSupply : Number,
-    marketCap : Number
-  }]
+  data: Array
 });
 
 var Crypto = mongoose.model('Crypto', cryptoSchema);

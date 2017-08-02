@@ -4,7 +4,7 @@ var Crypto = require('./db');
 
 console.log('Cron job started...');
 
-new CronJob('1 * * * * *', function() {
+new CronJob('* * * * * *', function() {
 
   console.log('Fetching data...');
 
@@ -19,22 +19,59 @@ new CronJob('1 * * * * *', function() {
 
       res.on('end', function(){
           try {
-            let jsonData = JSON.parse(body);
-            let cryptoModelArray = [];
-            let cryptoData = [];
-            for(var i = 0; i < 4; i++){
-              cryptoData.push(
-              {
-                name: jsonData[i].name,
-                symbol: jsonData[i].symbol,
-                price: jsonData[i].price_gbp,
-                marketCap: jsonData[i].market_cap_gbp,
-                totalSupply: jsonData[i].total_supply
+
+            Crypto.findOne({ }, 'data', function (err, result) {
+              if (err) return handleError(err);
+
+              let dataArrays = [];
+
+              if(result){
+                for(var i = 0; i<result.data.length; i++){
+                  dataArrays.push(result.data[i].data);
+                }
+
+                console.log(dataArrays);
+              }
+
+
+              let jsonData = JSON.parse(body);
+              let cryptoModelArray = [];
+              let cryptoData = [];
+              for(var i = 0; i < 4; i++){
+
+                if(dataArrays[i]) dataArrays[i].push({x: new Date, y: parseFloat(jsonData[i].price_gbp)});
+
+                cryptoData.push({
+                    name: jsonData[i].name,
+                    symbol: jsonData[i].symbol,
+                    currentPrice: jsonData[i].price_gbp,
+                    currentMarketCap: jsonData[i].market_cap_gbp,
+                    currentTotalSupply: jsonData[i].total_supply,
+                    data: dataArrays[i] ? dataArrays[i] : [{x: new Date, y : parseFloat(jsonData[i].price_gbp)}]
+                  });
+              }
+
+              //cryptoModelArray.push({index:1, data: cryptoData });
+
+              let query = {},
+                  update = { data: cryptoData, date: new Date },
+                  options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+              // Find the document
+              Crypto.findOneAndUpdate(query, update, options, function(error, result) {
+                  if (error) return;
+                  // do something with the document
+                  // console.log(result.data)
               });
 
-            }
-            cryptoModelArray.push({data: cryptoData });
-            Crypto.insertMany(cryptoModelArray);
+
+
+            })
+
+
+
+
+
             console.log('Data added to database!');
           } catch (e) {
             console.log(e);
