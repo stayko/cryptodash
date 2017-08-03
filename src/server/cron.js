@@ -4,7 +4,7 @@ var Crypto = require('./db');
 
 console.log('Cron job started...');
 
-new CronJob('* * * * * *', function() {
+new CronJob('1 * * * * *', function() {
 
   console.log('Fetching data...');
 
@@ -39,7 +39,10 @@ new CronJob('* * * * * *', function() {
               let cryptoData = [];
               for(var i = 0; i < 4; i++){
 
-                if(dataArrays[i]) dataArrays[i].push({x: new Date, y: parseFloat(jsonData[i].price_gbp)});
+                let d = new Date();
+                let time = parseInt(d.getHours() + "" + d.getMinutes());
+
+                if(dataArrays[i]) dataArrays[i].push({x: time, y: parseFloat(jsonData[i].price_gbp)});
 
                 cryptoData.push({
                     name: jsonData[i].name,
@@ -47,7 +50,7 @@ new CronJob('* * * * * *', function() {
                     currentPrice: jsonData[i].price_gbp,
                     currentMarketCap: jsonData[i].market_cap_gbp,
                     currentTotalSupply: jsonData[i].total_supply,
-                    data: dataArrays[i] ? dataArrays[i] : [{x: new Date, y : parseFloat(jsonData[i].price_gbp)}]
+                    data: dataArrays[i] ? dataArrays[i] : [{x: time, y : parseFloat(jsonData[i].price_gbp)}]
                   });
               }
 
