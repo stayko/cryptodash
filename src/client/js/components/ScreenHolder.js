@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import PropTypes from 'prop-types';
 
 class ScreenHolder extends React.Component {
 
@@ -14,10 +13,5 @@ class ScreenHolder extends React.Component {
            </div>
   }
 }
-
-/*
-Screen.propTypes = {
-  data: PropTypes.Object
-};*/
 
 export default ScreenHolder;

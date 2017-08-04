@@ -1,6 +1,6 @@
-var https = require('https');
-var CronJob = require('cron').CronJob;
-var Crypto = require('./db');
+let https = require('https'),
+    CronJob = require('cron').CronJob,
+    Crypto = require('./db');
 
 console.log('Cron job started...');
 
@@ -26,7 +26,7 @@ new CronJob('1 * * * * *', function() {
               let dataArrays = [];
 
               if(result){
-                for(var i = 0; i<result.data.length; i++){
+                for(let i = 0; i<result.data.length; i++){
                   dataArrays.push(result.data[i].data);
                 }
 
@@ -34,13 +34,12 @@ new CronJob('1 * * * * *', function() {
               }
 
 
-              let jsonData = JSON.parse(body);
-              let cryptoModelArray = [];
-              let cryptoData = [];
-              for(var i = 0; i < 4; i++){
+              let jsonData = JSON.parse(body),
+                  cryptoData = [];
 
-                let d = new Date();
-                let time = parseInt(d.getHours() + "" + d.getMinutes());
+              for(let i = 0; i < 4; i++){
+
+                let time = Date.now();
 
                 if(dataArrays[i]) dataArrays[i].push({x: time, y: parseFloat(jsonData[i].price_gbp)});
 
@@ -54,8 +53,6 @@ new CronJob('1 * * * * *', function() {
                   });
               }
 
-              //cryptoModelArray.push({index:1, data: cryptoData });
-
               let query = {},
                   update = { data: cryptoData, date: new Date },
                   options = { upsert: true, new: true, setDefaultsOnInsert: true };
@@ -63,17 +60,10 @@ new CronJob('1 * * * * *', function() {
               // Find the document
               Crypto.findOneAndUpdate(query, update, options, function(error, result) {
                   if (error) return;
-                  // do something with the document
-                  // console.log(result.data)
               });
 
 
-
             })
-
-
-
-
 
             console.log('Data added to database!');
           } catch (e) {

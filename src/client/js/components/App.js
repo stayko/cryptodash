@@ -20,8 +20,7 @@ class App extends React.Component {
   }
 
   fetchData() {
-
-    fetch('http://localhost:8080/api')
+    fetch('/api')
       .then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -47,7 +46,7 @@ class App extends React.Component {
               <Header/>
               <DateTime/>
               <ScreenHolder>
-                {!this.state.loading ? this.state.data[0].data.map((item) => <Screen key={item.symbol} title={item.name} price={item.price} data={[{ color: "steelblue", points: item.data}]} />) : "Loading..." }
+                {!this.state.loading ? this.state.data[0].data.map((item) => <Screen key={item.symbol} title={item.name} price={item.currentPrice} data={[{ color: "steelblue", points: item.data}]} />) : "Loading..." }
               </ScreenHolder>
            </div>;
   }

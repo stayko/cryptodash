@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import LineChart from 'react-linechart';
-
 import '../../css/line.scss';
 
 class Screen extends React.Component {
@@ -12,7 +11,6 @@ class Screen extends React.Component {
   }
 
   render() {
-
     return <div className="screen">
             <div>{this.props.title}</div>
             <div>{this.props.price}</div>
@@ -20,7 +18,6 @@ class Screen extends React.Component {
            </div>
   }
 }
-
 
 Screen.propTypes = {
   title: PropTypes.string,
