@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack-dev-server",
-    "build-prod": "webpack -p"
+    "build-prod": "webpack -p",
+    "start" : "webpack -p && PORT=8080 node index.js"
   },
   "author": "Stayko Chalakov",
   "license": "MIT",
