@@ -46,9 +46,9 @@ new CronJob('1 * * * * *', function() {
                 cryptoData.push({
                     name: jsonData[i].name,
                     symbol: jsonData[i].symbol,
-                    currentPrice: jsonData[i].price_gbp,
-                    currentMarketCap: jsonData[i].market_cap_gbp,
-                    currentTotalSupply: jsonData[i].total_supply,
+                    currentPrice: parseFloat(jsonData[i].price_gbp),
+                    currentMarketCap: parseFloat(jsonData[i].market_cap_gbp),
+                    currentTotalSupply: parseFloat(jsonData[i].total_supply),
                     data: dataArrays[i] ? dataArrays[i] : [{x: time, y : parseFloat(jsonData[i].price_gbp)}]
                   });
               }

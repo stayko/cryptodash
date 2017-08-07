@@ -1,16 +1,19 @@
 // call the packages we need
 let express = require('express'),
-    app = express(),                s
+    app = express(),
     Crypto = require('./src/server/db'),
     path = require('path'),
     port = process.env.PORT || 8080,
-    router = express.Router();
+    router = express.Router(),
+    CONFIG = require('./config');
 
 //(accessed at GET http://localhost:8080/api)
 router.get('/api', function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    if(CONFIG.ENV=='DEV'){
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET');
+      res.header('Access-Control-Allow-Headers', 'Content-Type');
+    }
 
     Crypto.find({}, function (err, docs) {
       // docs is an array

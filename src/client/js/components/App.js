@@ -10,6 +10,9 @@ import '../../css/main.scss';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
+const CONFIG = require('../../../../config');
+const API_URL = CONFIG.ENV=='PROD' ? "/api" : "http://localhost:8080/api"
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,7 @@ class App extends React.Component {
   }
 
   fetchData() {
-    fetch('/api')
+    fetch(API_URL)
       .then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
